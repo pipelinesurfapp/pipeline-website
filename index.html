@@ -21,17 +21,17 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-  /* Brand fonts */
+  /* Brand fonts — at repo root */
   @font-face {
     font-family: "Ronale";
-    src: url("./fonts/Ronale.woff2") format("woff2");
+    src: url("./Ronale.woff2") format("woff2");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: "Zeminous";
-    src: url("./fonts/Zeminous.woff2") format("woff2");
+    src: url("./Zeminous.woff2") format("woff2");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -71,7 +71,7 @@
     z-index: 0;
   }
 
-  /* Vignette overlay — darkens edges so text reads cleanly without obscuring water */
+  /* Vignette overlay */
   .bg::after {
     content: "";
     position: absolute;
@@ -108,7 +108,6 @@
     margin-bottom: 48px;
   }
 
-  /* PIPELINE wordmark — Ronale, gold, all caps */
   .wordmark {
     font-family: "Ronale", "Playfair Display", Georgia, serif;
     font-weight: normal;
@@ -123,7 +122,6 @@
     margin-bottom: 8px;
   }
 
-  /* "the surf call." tagline — Zeminous, gold, lowercase */
   .tagline {
     font-family: "Zeminous", "Ronale", Georgia, serif;
     font-size: clamp(22px, 4.5vw, 32px);
@@ -133,7 +131,6 @@
     margin-bottom: 0;
   }
 
-  /* "Coming soon to iOS" badge */
   .coming-soon {
     display: inline-block;
     background: rgba(10, 22, 40, 0.55);
@@ -151,7 +148,6 @@
     border: 1px solid rgba(244, 233, 212, 0.15);
   }
 
-  /* Email signup card */
   .signup-card {
     background: rgba(10, 22, 40, 0.55);
     backdrop-filter: blur(20px);
@@ -253,7 +249,6 @@
     color: #FF8A82;
   }
 
-  /* Footer with privacy / contact links */
   .footer {
     position: relative;
     z-index: 1;
@@ -303,7 +298,6 @@
     }
   }
 
-  /* Smaller screens — pull hero up a bit */
   @media (max-height: 700px) {
     .page { padding-top: 32px; }
     .hero { margin-bottom: 32px; }
@@ -351,10 +345,7 @@
 </footer>
 
 <script>
-  // Email signup handler.
-  // TODO: Replace SUBMIT_ENDPOINT with your Supabase edge function URL once set up.
-  // Until then, submissions are queued in localStorage so nothing is lost.
-  const SUBMIT_ENDPOINT = null; // e.g. "https://tcfgrznqfmrmpnbcclnw.supabase.co/functions/v1/email-signup"
+  const SUBMIT_ENDPOINT = null;
 
   const form = document.getElementById('signupForm');
   const input = document.getElementById('emailInput');
@@ -392,7 +383,6 @@
         });
         if (!res.ok) throw new Error('Submission failed');
       } else {
-        // Fallback: queue locally until endpoint is wired up
         const queued = JSON.parse(localStorage.getItem('pipeline_email_queue') || '[]');
         queued.push({ email: email, ts: new Date().toISOString() });
         localStorage.setItem('pipeline_email_queue', JSON.stringify(queued));
